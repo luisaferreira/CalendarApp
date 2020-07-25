@@ -1,12 +1,6 @@
-ion-toolbar {
-    --background: #00303F;
-    --border-color: #f4f4f4;
-}
-
 #div-cadastro {
-    // height: 40%;
     height: 40%;
-    margin-top: 20%;
+    margin-top: 60%;
     text-align: center;
 }
 
@@ -21,8 +15,7 @@ ion-toolbar {
 }
 
 ion-item {
-    // --border-color: #000
-    --border-radius: 10px;
+    --border-radius: 15px;
 }
 
 .button-links {
@@ -35,8 +28,7 @@ ion-datetime {
 }
 
 ion-content {
-    // --background: #dfdce3;
-    --background: #00303F;
+    --background: rgb(33, 36, 37);
 }
 
 h1{
@@ -46,8 +38,8 @@ h1{
 }
 
 #button-login {
-    --background: #88bbd6;
-    --background-activated: #78a5bc; 
+    --background: #a5377b;
+    --background-activated: #91306c; 
     --border-radius: 10px;
 }
 
