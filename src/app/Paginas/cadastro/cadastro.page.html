@@ -9,6 +9,12 @@
     </ion-item>
 
     <ion-item class="ion-margin-top" lines="none">
+      <ion-input type="text" placeholder="Username" [(ngModel)]="usuario.username">
+        <ion-icon name="at-sharp" slot="start"></ion-icon>
+      </ion-input>
+    </ion-item>
+
+    <ion-item class="ion-margin-top" lines="none">
       <ion-input type="email" placeholder="E-mail" [(ngModel)]="usuario.email">
         <ion-icon name="mail-sharp" slot="start"></ion-icon>
       </ion-input>

@@ -3,6 +3,7 @@ import { Usuario } from 'src/app/interfaces/usuario';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class CadastroPage implements OnInit {
     private afAuth: AngularFireAuth,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
-    private router: Router
+    private router: Router,
+    private afStore: AngularFirestore
   ) { }
 
   ngOnInit() {
@@ -29,7 +31,15 @@ export class CadastroPage implements OnInit {
     await this.presentLoading();
 
     try {
-      await this.afAuth.createUserWithEmailAndPassword(this.usuario.email, this.usuario.senha);
+      const novoUsr = await this.afAuth.createUserWithEmailAndPassword(this.usuario.email, this.usuario.senha);
+      const novoUsrObj = Object.assign({}, this.usuario);
+      delete novoUsrObj.email;
+      delete novoUsrObj.senha;
+      await this.afStore.collection('Usuários').doc(novoUsr.user.uid).set(novoUsrObj);
+      console.log(novoUsrObj);
+      console.log(this.usuario);
+      console.log(novoUsr);
+      
       this.afAuth.onAuthStateChanged(user => {
         if (user) {
           user.updateProfile({
