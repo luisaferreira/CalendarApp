@@ -9,6 +9,10 @@ const routes: Routes = [
   {
     path: 'configuracoes',
     loadChildren: () => import('./Paginas/configuracoes/configuracoes.module').then( m => m.ConfiguracoesPageModule)
+  },
+  {
+    path: 'calend-modal',
+    loadChildren: () => import('./Paginas/calend-modal/calend-modal.module').then( m => m.CalendModalPageModule)
   }
 ];
 @NgModule({

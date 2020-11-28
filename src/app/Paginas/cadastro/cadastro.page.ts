@@ -30,11 +30,16 @@ export class CadastroPage implements OnInit {
   async cadastrar () {
     await this.presentLoading();
 
+    if (this.usuario.senha != this.usuario.confSenha) {
+      this.presentToast("the passwords doesn't match")
+      return console.error("As senhas não são iguais");
+    }
+
     try {
       const novoUsr = await this.afAuth.createUserWithEmailAndPassword(this.usuario.email, this.usuario.senha);
       const novoUsrObj = Object.assign({}, this.usuario);
-      delete novoUsrObj.email;
       delete novoUsrObj.senha;
+      delete novoUsrObj.confSenha;
       await this.afStore.collection('Usuários').doc(novoUsr.user.uid).set(novoUsrObj);
       console.log(novoUsrObj);
       console.log(this.usuario);
@@ -43,7 +48,7 @@ export class CadastroPage implements OnInit {
       this.afAuth.onAuthStateChanged(user => {
         if (user) {
           user.updateProfile({
-            displayName: this.usuario.nome
+            displayName: this.usuario.username
           })
         }
         console.log(user);

@@ -15,26 +15,26 @@ export class Tab3Page implements OnInit{
   ) {}
 
   ngOnInit(){
-    this.displayInfo();
+    // this.displayInfo();
   }
 
-  displayInfo() {
-    const emailUser = document.querySelector('.email_user')
-    const nomeUser = document.querySelector('.nome_user')
+  // displayInfo() {
+  //   const emailUser = document.querySelector('.email_user')
+  //   const nomeUser = document.querySelector('.nome_user')
   
-    this.afAuth.onAuthStateChanged(user => {
-      if (user) {
-        const htmlName = `<h2> ${ user.displayName } </h2>`
-        const htmlEmail = `<h2> ${ user.email } </h2>`
+  //   this.afAuth.onAuthStateChanged(user => {
+  //     if (user) {
+  //       const htmlName = `<h2> ${ user.displayName } </h2>`
+  //       const htmlEmail = `<h2> ${ user.email } </h2>`
 
-        nomeUser.innerHTML = htmlName
-        emailUser.innerHTML = htmlEmail
-      } else {
-        nomeUser.innerHTML = ''
-        emailUser.innerHTML = ''
-      }
-    })
-  }
+  //       nomeUser.innerHTML = htmlName
+  //       emailUser.innerHTML = htmlEmail
+  //     } else {
+  //       nomeUser.innerHTML = ''
+  //       emailUser.innerHTML = ''
+  //     }
+  //   })
+  // }
 
   async logout() {
     try {
