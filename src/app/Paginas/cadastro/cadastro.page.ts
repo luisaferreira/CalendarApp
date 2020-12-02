@@ -4,7 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
-
+import { UsuarioService } from 'src/app/Services/usuario.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -22,7 +22,8 @@ export class CadastroPage implements OnInit {
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
     private router: Router,
-    private afStore: AngularFirestore
+    private afStore: AngularFirestore,
+    private usuarioService: UsuarioService
   ) { }
 
   ngOnInit() {
@@ -45,13 +46,10 @@ export class CadastroPage implements OnInit {
 
     try {
       const novoUsr = await this.afAuth.createUserWithEmailAndPassword(this.usuario.email, this.usuario.senha);
-      const novoUsrObj = Object.assign({}, this.usuario);
-      delete novoUsrObj.senha;
-      delete novoUsrObj.confSenha;
-      await this.afStore.collection('Usuários').doc(novoUsr.user.uid).set(novoUsrObj);
-      console.log(novoUsrObj);
-      console.log(this.usuario);
-      console.log(novoUsr);
+      this.usuario.email = novoUsr.user.email;
+      this.usuario.numEventos = 0;
+      this.usuario.seguindo = [];
+      this.usuario.numSeguindo = 0;
       
       this.afAuth.onAuthStateChanged(user => {
         if (user) {
@@ -59,8 +57,10 @@ export class CadastroPage implements OnInit {
             displayName: this.usuario.username
           })
         }
-        console.log(user);
       })
+      delete this.usuario.confSenha
+      delete this.usuario.senha
+      await this.usuarioService.addUsuario(this.usuario)
 
       this.router.navigate(['/tabs/tab1']);
     } catch (error) {
