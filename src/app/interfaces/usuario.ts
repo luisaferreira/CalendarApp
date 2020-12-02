@@ -3,5 +3,7 @@ export interface Usuario {
     senha?: string;
     confSenha?: string;
     username?: string;
-    amigos?: string[];
+    seguindo?: string[];
+    numSeguindo?: number;
+    numEventos?: number
 }

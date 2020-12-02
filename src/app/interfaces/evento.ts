@@ -3,6 +3,9 @@ export interface Evento {
     descricao?: string;
     comeco?: any;
     fim?: any;
-    usuarioId?: any;
+    usuarioId?: string;
+    usuarioNome?: string;
     id?: string;
+    usersAdd?: string[];
+    numAdd?: number;
 }

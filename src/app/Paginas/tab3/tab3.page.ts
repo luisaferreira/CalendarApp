@@ -1,44 +1,81 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Evento } from 'src/app/interfaces/evento';
+import { EventoService } from 'src/app/Services/evento.service';
+import { Subscription } from 'rxjs';
+import { Usuario } from 'src/app/interfaces/usuario';
+import { IonSlides } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss']
 })
-export class Tab3Page implements OnInit{
+export class Tab3Page implements OnInit {
+  @ViewChild(IonSlides, {static: true}) slides: IonSlides
+
+  private evento: Evento = {};
+  private eventoId: string = null;
+  private eventos = new Array <Evento>();
+  private eventoSubs: Subscription;
+  private usuarios = new Array<Usuario>();
+  private usuario: Usuario = {}; 
+  private usuarioId: string;
 
   constructor(
-    private afAuth: AngularFireAuth,
-    private router: Router
-  ) {}
+    private afauth: AngularFireAuth,
+    private activeRoute: ActivatedRoute,
+    private eventoService: EventoService
+  ) {
+    this.subs();
 
-  ngOnInit(){
-     this.displayInfo();
+    this.eventoId = this.activeRoute.snapshot.params['id'];
+    if (this.eventoId) this.loadEvento();
+   }
+
+  async ngOnInit() {
+    this.displayInfo();
   }
 
-  displayInfo() {
-   const nomeUser = document.querySelector('.nome_user')
-  
-  this.afAuth.onAuthStateChanged(user => {
+  async subs() {
+   this.afauth.onAuthStateChanged(user => {
      if (user) {
-        const htmlName = `<h2> ${ user.displayName } </h2>`
-        nomeUser.innerHTML = htmlName 
-     } else {
-        nomeUser.innerHTML = ''
+       this.usuarioId = user.uid
+       this.eventoSubs = this.eventoService.getEventos().subscribe(data => {
+       this.eventos = data.filter(eve => eve.usuarioId === this.usuarioId).sort((a,b) => a.comeco > b.comeco ? -1 : 1);
+     });
      }
+   })
+    
+    
+     
+  }
+
+  loadEvento() {
+    this.eventoSubs = this.eventoService.getEvento(this.eventoId).subscribe(data => {
+      this.evento = data;
     })
   }
 
-  async logout() {
-    try {
-      await this.afAuth.signOut();
+  displayInfo() {
+    const nomeUser = document.querySelector('.nome_user')
 
-      this.router.navigate(['/login'])
+    this.afauth.onAuthStateChanged(user => {
+      if (user) {
+        const htmlName = `<h1> @${user.displayName} </h1>`
+        nomeUser.innerHTML = htmlName
+      } else {
+        nomeUser.innerHTML = ''
+      }
+    })
+  }
+
+  async deleteEvento(id: string) {
+    try {
+      await this.eventoService.deleteEvento(id);
     } catch (error) {
       console.log(error);
-      
     }
   }
 

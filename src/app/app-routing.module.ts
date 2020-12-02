@@ -25,6 +25,14 @@ const routes: Routes = [
   {
     path: 'excluir-conta',
     loadChildren: () => import('./Paginas/excluir-conta/excluir-conta.module').then( m => m.ExcluirContaPageModule)
+  },
+  {
+    path: 'detalhesevento',
+    loadChildren: () => import('./Paginas/detalhesevento/detalhesevento.module').then( m => m.DetalheseventoPageModule)
+  },
+  {
+    path: 'perfilalheio',
+    loadChildren: () => import('./Paginas/perfilalheio/perfilalheio.module').then( m => m.PerfilalheioPageModule)
   }
 ];
 @NgModule({

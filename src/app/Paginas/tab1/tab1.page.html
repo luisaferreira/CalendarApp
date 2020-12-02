@@ -7,7 +7,7 @@
 </ion-header>
 
   <ion-content>
-    <ion-list >
+    <ion-list *ngIf="!eventos.lenght">
       <ion-item *ngFor="let item of [0, 1, 2]">
         <ion-avatar slot="start">
           <ion-skeleton-text animated></ion-skeleton-text>
