@@ -15,19 +15,19 @@
   <div *ngIf="showAddEvent" class="ion-padding">
     <ion-item>
       <ion-label><b>Título:</b></ion-label>
-      <ion-input type="text" placeholder="Qual o evento?" [(ngModel)]="Evento.titulo"></ion-input>
+      <ion-input type="text" placeholder="Qual o evento?" [(ngModel)]="evento.titulo"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label><b>Descrição:</b></ion-label>
-      <ion-input type="text" placeholder="O que vai acontecer?" [(ngModel)]="Evento.descricao"></ion-input>
+      <ion-input type="text" placeholder="O que vai acontecer?" [(ngModel)]="evento.descricao"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label><b>Começo:</b></ion-label>
-      <ion-datetime doneText="OK" cancelText="Cancelar" i18n displayFormat="DD/MM/YYYY HH:mm" pickerFormat="MMM D HH:mm" [(ngModel)]="Evento.comeco" [min]="minDate"></ion-datetime>
+      <ion-datetime doneText="OK" cancelText="Cancelar" i18n displayFormat="DD/MM/YYYY HH:mm" pickerFormat="MMM D HH:mm" [(ngModel)]="evento.comeco" [min]="minDate"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label><b>Fim:</b></ion-label>
-      <ion-datetime doneText="OK" cancelText="Cancelar" displayFormat="DD/MM/YYYY HH:mm" pickerFormat="MMM D HH:mm" [(ngModel)]="Evento.fim" [min]="minDate"></ion-datetime>
+      <ion-datetime doneText="OK" cancelText="Cancelar" displayFormat="DD/MM/YYYY HH:mm" pickerFormat="MMM D HH:mm" [(ngModel)]="evento.fim" [min]="minDate"></ion-datetime>
     </ion-item>
     <ion-button color="warning" expand="block" (click)="addEvento()">Adicionar</ion-button>
   </div>

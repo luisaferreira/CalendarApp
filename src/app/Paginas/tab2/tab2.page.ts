@@ -1,6 +1,7 @@
 import { CalendarComponent } from 'ionic2-calendar';
 import { Component, ViewChild, OnInit, Inject, LOCALE_ID } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore'
+import { Evento } from 'src/app/interfaces/evento';
 
 @Component({
   selector: 'app-tab2',
@@ -9,13 +10,7 @@ import { AngularFirestore } from '@angular/fire/firestore'
 })
 export class Tab2Page implements OnInit{
 
-  Evento = {
-    titulo: '',
-    descricao: '',
-    comeco: '',
-    fim: ''
-  }
-  allEvents = [];
+  public evento: Evento = {}
   minDate = new Date().toISOString();
   currentDate = new Date();
   currentMonth: string;
@@ -34,7 +29,7 @@ export class Tab2Page implements OnInit{
 
   showHideForm() {
     this.showAddEvent = !this.showAddEvent;
-    this.Evento = {
+    this.evento = {
     titulo: '',
     descricao: '',
     comeco: new Date().toISOString(),
@@ -43,17 +38,11 @@ export class Tab2Page implements OnInit{
 }
 
 addEvento() {
-  this.allEvents.push({
-    title: this.Evento.titulo,
-    startTime:  new Date(this.Evento.comeco),
-    endTime: new Date(this.Evento.fim),
-    description: this.Evento.descricao
-    });
     this.afs.collection('Eventos').add({
-      titulo: this.Evento.titulo,
-      comeco: this.Evento.comeco,
-      fim: this.Evento.fim,
-      descricao: this.Evento.descricao
+      titulo: this.evento.titulo,
+      comeco: this.evento.comeco,
+      fim: this.evento.fim,
+      descricao: this.evento.descricao
     })
   this.showHideForm();
 }

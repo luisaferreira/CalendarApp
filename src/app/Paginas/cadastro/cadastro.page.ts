@@ -15,6 +15,7 @@ export class CadastroPage implements OnInit {
 
   public usuario: Usuario = {};
   private loading: any;
+  private ArrayUser = [];
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -34,6 +35,13 @@ export class CadastroPage implements OnInit {
       this.presentToast("the passwords doesn't match")
       return console.error("As senhas não são iguais");
     }
+
+   if (this.ArrayUser.includes(this.usuario.username) == true) {
+    this.presentToast("This username is already on use")
+    return console.error("Username repetido");
+   } else {
+     this.ArrayUser.push(this.usuario.username)
+   }
 
     try {
       const novoUsr = await this.afAuth.createUserWithEmailAndPassword(this.usuario.email, this.usuario.senha);

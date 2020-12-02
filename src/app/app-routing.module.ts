@@ -13,6 +13,18 @@ const routes: Routes = [
   {
     path: 'calend-modal',
     loadChildren: () => import('./Paginas/calend-modal/calend-modal.module').then( m => m.CalendModalPageModule)
+  },
+  {
+    path: 'new-email',
+    loadChildren: () => import('./Paginas/new-email/new-email.module').then( m => m.NewEmailPageModule)
+  },
+  {
+    path: 'new-senha',
+    loadChildren: () => import('./Paginas/new-senha/new-senha.module').then( m => m.NewSenhaPageModule)
+  },
+  {
+    path: 'excluir-conta',
+    loadChildren: () => import('./Paginas/excluir-conta/excluir-conta.module').then( m => m.ExcluirContaPageModule)
   }
 ];
 @NgModule({

@@ -1,34 +1,35 @@
 import { Component, OnInit } from '@angular/core';
+import { Usuario } from 'src/app/interfaces/usuario';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { LoadingController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { LoadingController, ToastController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-configuracoes',
-  templateUrl: './configuracoes.page.html',
-  styleUrls: ['./configuracoes.page.scss'],
+  selector: 'app-new-email',
+  templateUrl: './new-email.page.html',
+  styleUrls: ['./new-email.page.scss'],
 })
-export class ConfiguracoesPage implements OnInit {
-
+export class NewEmailPage implements OnInit {
+  
+  public usuario: Usuario = {};
   private loading: any;
-
-  constructor( 
+  
+  constructor(
     private afAuth: AngularFireAuth,
-    private loadingCtrl: LoadingController,
-    private toastCtrl: ToastController,
-    private router: Router
+    private router: Router,
+    public loadingCtrl: LoadingController,
+    private toastCtrl: ToastController
   ) { }
 
   ngOnInit() {
   }
 
-  async logout() {
+  async atualizarEmail() {
     await this.presentLoading();
 
     try {
-      await this.afAuth.signOut();
-
-      this.router.navigate(['/login'])
+      (await this.afAuth.currentUser).updateEmail(this.usuario.email);
+      this.router.navigate(['/configuracoes']);
     } catch (error) {
       console.log(error);
       this.presentToast(error.message);
@@ -46,7 +47,6 @@ export class ConfiguracoesPage implements OnInit {
 
   async presentToast(message: string) {
     const toast = await this.toastCtrl.create({
-      header: "oops",
       message: message,
       duration: 2000
     });
