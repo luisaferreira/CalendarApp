@@ -9,3 +9,4 @@ export interface Evento {
     usersAdd?: string[];
     numAdd?: number;
 }
+ 

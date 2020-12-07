@@ -6,7 +6,7 @@ import {EventoService} from 'src/app/Services/evento.service';
 import { Subscription } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ActivatedRoute } from '@angular/router';
-import { userInfo } from 'os';
+
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',

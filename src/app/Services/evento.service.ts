@@ -40,6 +40,11 @@ private eventosCollection: AngularFirestoreCollection<Evento>;
     return this.eventosCollection.doc<Evento>(id).valueChanges();
   }
 
+  //atualizar evento específico
+  updateEvento (id: string, evento: Evento) {
+    return this.eventosCollection.doc<Evento>(id).update(evento);
+  }
+
   //deletar evento
   deleteEvento(id: string) {
     return this.eventosCollection.doc(id).delete();
