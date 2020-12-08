@@ -8,7 +8,6 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { Tab2PageRoutingModule } from './tab2-routing.module';
 import { NgCalendarModule } from 'ionic2-calendar';
-import { CalendModalPageModule } from '../calend-modal/calend-modal.module';
 
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
@@ -21,8 +20,7 @@ registerLocaleData(localePt, 'pt');
     FormsModule,
     ExploreContainerComponentModule,
     Tab2PageRoutingModule,
-    NgCalendarModule,
-    CalendModalPageModule
+    NgCalendarModule
   ],
   declarations: [Tab2Page],
 })

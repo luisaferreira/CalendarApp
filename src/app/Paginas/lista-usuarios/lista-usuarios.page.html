@@ -1,0 +1,16 @@
+<ion-content>
+  <ion-searchbar [(ngModel)]="pesquisa" (ionInput)="filterList($event)" placeholder="Quem procuras?"></ion-searchbar>
+
+  <ion-list>
+    <ion-item button *ngFor="let usuario of listaUsuarios">
+      <ion-label>
+        <h3> {{ usuario.username }} </h3>
+        <p> {{ usuario.email }} </p>
+      </ion-label>
+      <ion-button slot="end" fill="clear" routerLink="/lista-usuarios">
+        <ion-icon slot="icon-only" name="person-add-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

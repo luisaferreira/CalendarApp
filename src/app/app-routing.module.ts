@@ -7,12 +7,12 @@ const routes: Routes = [
   { path: 'cadastro', loadChildren: () => import('./Paginas/cadastro/cadastro.module').then( m => m.CadastroPageModule)},
   { path: 'login', loadChildren: () => import('./Paginas/login/login.module').then( m => m.LoginPageModule)},
   { path: 'configuracoes', loadChildren: () => import('./Paginas/configuracoes/configuracoes.module').then( m => m.ConfiguracoesPageModule)},
-  { path: 'calend-modal', loadChildren: () => import('./Paginas/calend-modal/calend-modal.module').then( m => m.CalendModalPageModule)},
   { path: 'new-email', loadChildren: () => import('./Paginas/new-email/new-email.module').then( m => m.NewEmailPageModule)},
   { path: 'new-senha', loadChildren: () => import('./Paginas/new-senha/new-senha.module').then( m => m.NewSenhaPageModule)},
   { path: 'excluir-conta', loadChildren: () => import('./Paginas/excluir-conta/excluir-conta.module').then( m => m.ExcluirContaPageModule)},
   { path: 'detalhesevento/:id', loadChildren: () => import('./Paginas/detalhesevento/detalhesevento.module').then( m => m.DetalheseventoPageModule)},
-  { path: 'perfilalheio', loadChildren: () => import('./Paginas/perfilalheio/perfilalheio.module').then( m => m.PerfilalheioPageModule)}
+  { path: 'perfilalheio', loadChildren: () => import('./Paginas/perfilalheio/perfilalheio.module').then( m => m.PerfilalheioPageModule)},
+  { path: 'lista-usuarios', loadChildren: () => import('./Paginas/lista-usuarios/lista-usuarios.module').then( m => m.ListaUsuariosPageModule)}
 ];
 @NgModule({
   imports: [

@@ -6,7 +6,8 @@ import { Observable, combineLatest } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { LoadingController, ToastController } from '@ionic/angular';
-
+import { first } from 'rxjs/operators'
+import { Usuario } from 'src/app/interfaces/usuario'; 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -27,10 +28,17 @@ export class Tab1Page implements OnInit{
       this.eventos = data;
     })
   }
-  ngOnInit() {}
+  
+  ngOnInit() {
+
+  }
 
   ngOnDestroy(){
     this.eventosSubscription.unsubscribe();
   }
 
+
+
+
+  
 }

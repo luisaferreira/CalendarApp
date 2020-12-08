@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CalendModalPageRoutingModule } from './calend-modal-routing.module';
+import { ListaUsuariosPageRoutingModule } from './lista-usuarios-routing.module';
 
-import { CalendModalPage } from './calend-modal.page';
+import { ListaUsuariosPage } from './lista-usuarios.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CalendModalPageRoutingModule
+    ListaUsuariosPageRoutingModule
   ],
-  declarations: [CalendModalPage]
+  declarations: [ListaUsuariosPage]
 })
-export class CalendModalPageModule {}
+export class ListaUsuariosPageModule {}
