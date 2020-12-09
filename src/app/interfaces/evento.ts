@@ -1,3 +1,5 @@
+import { Comentario } from './comentario';
+
 export interface Evento {
     titulo?: string;
     descricao?: string;

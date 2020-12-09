@@ -2,15 +2,19 @@
   <ion-searchbar [(ngModel)]="pesquisa" (ionInput)="filterList($event)" placeholder="Quem procuras?"></ion-searchbar>
 
   <ion-list>
-    <ion-item button *ngFor="let usuario of listaUsuarios">
+    <ion-item-sliding *ngFor="let usuario of listaUsuarios">
+    <ion-item button>
       <ion-label>
         <h3> {{ usuario.username }} </h3>
         <p> {{ usuario.email }} </p>
       </ion-label>
-      <ion-button slot="end" fill="clear" routerLink="/lista-usuarios">
-        <ion-icon slot="icon-only" name="person-add-outline"></ion-icon>
-      </ion-button>
     </ion-item>
+
+    <ion-item-options side="end">
+      <ion-item-option color="secondary">
+        <ion-icon slot="top" name="person-add-outline"></ion-icon></ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
   </ion-list>
 
 </ion-content>

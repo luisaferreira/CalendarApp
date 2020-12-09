@@ -32,6 +32,8 @@ export class Tab2Page implements OnInit{
     this.eventoId = this.activeRoute.snapshot.params['id'];
   
     if (this.eventoId) this.loadEvento();
+    console.log(this.eventoId);
+    
   }
 
   ngOnInit() {}
@@ -59,12 +61,14 @@ async addEvento() {
    this.evento.numAdd = 0;
    this.evento.usuarioId = (await this.afauth.currentUser).uid
    this.evento.usuarioNome = (await this.afauth.currentUser).displayName
+   this.evento.comentarios = [];
    try{
      await this.eventoService.addEvento(this.evento);
    } catch (error) {
      console.log(error);
    } finally{
     this.showHideForm();
+    
    }
 }
   loadEvento() {

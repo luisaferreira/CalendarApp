@@ -3,6 +3,9 @@ import { Usuario } from 'src/app/interfaces/usuario';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { first } from 'rxjs/operators'
 import { Subscription, Subject } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { UsuarioService } from 'src/app/Services/usuario.service'
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-lista-usuarios',
@@ -16,12 +19,18 @@ export class ListaUsuariosPage implements OnInit {
   public usuario: Usuario = {};
 
   constructor(
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
+    private activatedRoute: ActivatedRoute,
+    private usuarioService: UsuarioService,
+    private afauth: AngularFireAuth
   ) { }
 
   async ngOnInit() {
     this.listaUsuarios = await this.initializaItems();
+     
   }
+
+ 
 
   async initializaItems(): Promise<any> {
     const listaUsuarios = await this.afs.collection('Usuários').valueChanges().pipe(first()).toPromise();
@@ -43,4 +52,5 @@ export class ListaUsuariosPage implements OnInit {
     })
   }
 
+ 
 }

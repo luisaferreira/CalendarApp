@@ -5,6 +5,10 @@ import { Subscription, from } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Evento } from 'src/app/interfaces/evento';
 import { EventoService } from 'src/app/Services/evento.service';
+import { ModalController } from '@ionic/angular';
+import { Comentario } from 'src/app/interfaces/comentario'
+import { ComentarioService } from 'src/app/Services/comentario.service';
+
 @Component({
   selector: 'app-detalhesevento',
   templateUrl: './detalhesevento.page.html',
@@ -15,6 +19,7 @@ export class DetalheseventoPage implements OnInit {
   private evento: Evento = {};
   private eventoId: string = null;
   private eventoSubs: Subscription;
+  private comentario: Comentario = {};
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -22,13 +27,16 @@ export class DetalheseventoPage implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private loadingCtrl: LoadingController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private modalCtrl: ModalController,
+    private comentarioService: ComentarioService
   ) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
-      this.inicializar(params['id']);
+      this.inicializar(params['id']);      
     })
+    console.log(this.eventoId);
   }
 
   ngOnDestroy() {
@@ -37,6 +45,7 @@ export class DetalheseventoPage implements OnInit {
 
   inicializar(id: string) {
     this.eventoId = id;
+  console.log(id);
 
     if(this.eventoId) this.loadEvento();
   }
@@ -68,5 +77,19 @@ export class DetalheseventoPage implements OnInit {
       
     }
 
+    }
+
+   
+
+    async coment() {
+      try{
+        this.comentario.createdAt = new Date().getTime();
+        this.comentario.username = (await this.afAuth.currentUser).displayName
+        this.comentario.idPost = this.eventoId;
+        
+        await this.comentarioService.addComentario(this.comentario)
+      } catch(error) {
+        console.log(error);
+      }
     }
 }

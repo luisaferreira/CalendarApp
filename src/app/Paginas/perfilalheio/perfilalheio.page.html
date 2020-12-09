@@ -1,0 +1,21 @@
+<ion-header color="#f752ad" [translucent]="true">
+    <ion-toolbar color="#f752ad">
+      <ion-title class="ion-text-center">
+        <ion-label>
+            {{ usuario.username }}
+        </ion-label>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content [fullscreen]="true">
+    <div id="divTop">
+      <ion-grid>
+        <ion-row>
+          <ion-col class="ion-text-center">{{ usuario.numEventos }} eventos</ion-col>
+          <ion-col class="ion-text-center">{{ usuario.numSeguindo }} seguindo</ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-button class="ion-margin-center" fill="solid" expand="block" (click)="seguir()">Seguir
+      </ion-button>
+    </div>

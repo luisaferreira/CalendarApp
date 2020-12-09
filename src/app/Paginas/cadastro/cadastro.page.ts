@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { LoadingController, ToastController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { UsuarioService } from 'src/app/Services/usuario.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-cadastro',
@@ -14,6 +15,8 @@ import { UsuarioService } from 'src/app/Services/usuario.service';
 export class CadastroPage implements OnInit {
 
   public usuario: Usuario = {};
+  private usuarioId: string = null;
+  private usuarioSubs: Subscription
   private loading: any;
   private ArrayUser = [];
 
@@ -23,10 +26,22 @@ export class CadastroPage implements OnInit {
     private toastCtrl: ToastController,
     private router: Router,
     private afStore: AngularFirestore,
-    private usuarioService: UsuarioService
-  ) { }
+    private usuarioService: UsuarioService,
+    private activeRoute: ActivatedRoute
+  ) { 
+   this.usuarioId = this.activeRoute.snapshot.params['id'];
+   if(this.usuarioId) this.loadUsuario();
+   console.log(this.usuarioId);
+   
+  }
 
   ngOnInit() {
+  }
+
+  loadUsuario() {
+    this.usuarioSubs = this.usuarioService.getUsuario(this.usuarioId).subscribe(data => {
+      this.usuario = data;
+    })
   }
 
   async cadastrar () {
@@ -68,6 +83,7 @@ export class CadastroPage implements OnInit {
       this.presentToast(error.message);
     } finally {
       this.loading.dismiss();
+      
     }
   }
 

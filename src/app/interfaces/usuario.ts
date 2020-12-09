@@ -6,4 +6,5 @@ export interface Usuario {
     seguindo?: string[];
     numSeguindo?: number;
     numEventos?: number
+    id?: string;
 }
