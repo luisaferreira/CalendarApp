@@ -15,9 +15,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class ComentarioPage implements OnInit {
 
   private comentario: Comentario = {};
+  private comentarios
   private eventoId: string = null;
   private eventoSubs: Subscription;
   private evento: Evento = {};
+
 
   constructor(
     private modalCtrl: ModalController,
@@ -49,21 +51,6 @@ export class ComentarioPage implements OnInit {
     })
   }
 
-  async coment() {
-    try{
-    this.comentario.createdAt = new Date().getTime();
-    this.comentario.username = (await this.afauth.currentUser).displayName
-    this.evento.comentarios.push(this.comentario);
-    await this.eventoService.updateEvento(this.eventoId, this.evento)
-  } catch(error) {
-    console.log(error);
-    
-  } finally{
-     this.modalCtrl.dismiss({
-      'dismissed': true
-    })
-  }
-  }
 
 
    

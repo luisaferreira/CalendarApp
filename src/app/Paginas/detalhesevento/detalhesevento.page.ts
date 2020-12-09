@@ -20,6 +20,8 @@ export class DetalheseventoPage implements OnInit {
   private eventoId: string = null;
   private eventoSubs: Subscription;
   private comentario: Comentario = {};
+  private comentarios = new Array<Comentario>(); 
+  private comentarioSubs: Subscription;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -30,7 +32,11 @@ export class DetalheseventoPage implements OnInit {
     private toastController: ToastController,
     private modalCtrl: ModalController,
     private comentarioService: ComentarioService
-  ) { }
+  ) { 
+    this.comentarioSubs = this.comentarioService.getComentarios().subscribe(data => {
+      this.comentarios = data.filter(com => com.idPost === this.eventoId).sort((a,b) => a.createdAt > b.createdAt ? -1 : 1);
+    })
+  }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
